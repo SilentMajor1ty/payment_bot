@@ -1,0 +1,7 @@
+version: 2
+authtoken: 2tj4KsghfziBDeAIu2NvDs22OM7_2R3Rc7Mn2XnhSQVM3asSr
+tunnels:
+  first:
+    addr: crypto_pay_webhook:3001
+    proto: http
+    hostname: inspired-keen-crayfish.ngrok-free.app
