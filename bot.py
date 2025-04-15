@@ -15,6 +15,7 @@ from tgbot.middlewares.config import ConfigMiddleware
 from tgbot.middlewares.database import DatabaseMiddleware
 from tgbot.services import broadcaster
 from infrastructure.database.models import Base
+from sqlalchemy.orm import Session
 
 
 async def on_startup(bot: Bot, admin_ids: list[int]):
@@ -101,8 +102,7 @@ async def main():
     engine = create_engine(config.db)
     session_pool = create_session_pool(engine)
 
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    Base.metadata.create_all(engine)
 
     dp.include_routers(*routers_list)
     dp.workflow_data.update(crypto_pay=crypto_pay)
