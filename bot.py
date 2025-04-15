@@ -102,8 +102,6 @@ async def main():
     engine = create_engine(config.db)
     session_pool = create_session_pool(engine)
 
-    Base.metadata.create_all(engine)
-
     dp.include_routers(*routers_list)
     dp.workflow_data.update(crypto_pay=crypto_pay)
 
