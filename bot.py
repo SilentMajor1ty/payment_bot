@@ -14,7 +14,8 @@ from tgbot.handlers import routers_list
 from tgbot.middlewares.config import ConfigMiddleware
 from tgbot.middlewares.database import DatabaseMiddleware
 from tgbot.services import broadcaster
-from infrastructure.database.models import Base
+from infrastructure.database.models.base import Base
+
 
 
 async def on_startup(bot: Bot, admin_ids: list[int]):
@@ -100,6 +101,8 @@ async def main():
 
     engine = create_engine(config.db)
     session_pool = create_session_pool(engine)
+
+    Base.metadata.create_all(engine)
 
     dp.include_routers(*routers_list)
     dp.workflow_data.update(crypto_pay=crypto_pay)
